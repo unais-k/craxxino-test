@@ -1,0 +1,42 @@
+import { PayloadAction, configureStore, createSlice } from "@reduxjs/toolkit";
+import { RegisteredUserInterface } from "@/types/user";
+import { RootState } from "./store";
+
+const initialState: { user: RegisteredUserInterface } = {
+    user: {
+        name: "",
+        email: "",
+        phone: "",
+        token: "",
+        password: "",
+        _id: "",
+        __v: 0,
+        dob: "",
+        address: "",
+        livedAtAddress: "",
+        genderLabel: "",
+        employmentStatus: "",
+        savingOrInvestment: "",
+        hobbies: "",
+        createProcessComplete: "",
+    },
+};
+
+const userSlice = createSlice({
+    name: "userData",
+    initialState,
+    reducers: {
+        setUser(state, action: PayloadAction<RegisteredUserInterface>) {
+            state.user = action.payload;
+        },
+        clearUser(state) {
+            state.user = initialState.user;
+        },
+    },
+});
+
+export const { setUser, clearUser } = userSlice.actions;
+
+export const selectUser = (state: RootState) => state.userData.user;
+
+export const userReducer = userSlice.reducer;

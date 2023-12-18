@@ -2,23 +2,10 @@
 
 import Input from "@/components/ui/input";
 import { handleSignUP } from "@/services/service";
+import { ErrorMessage, FormData } from "@/types/user";
 import Image from "next/image";
 import { useState } from "react";
 import validator from "validator";
-
-interface FormData {
-    email: string;
-    phone: string;
-    password: string;
-    confirmPassword: string;
-}
-
-interface ErrorMessage {
-    email: string;
-    phone: string;
-    password: string;
-    confirmPassword: string;
-}
 
 const initialFormData: FormData = {
     email: "",
