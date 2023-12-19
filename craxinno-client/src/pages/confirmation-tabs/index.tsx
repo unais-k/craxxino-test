@@ -1,4 +1,5 @@
 import PersonalInfoOne from "@/components/modules/PersonalInfoOne";
+import PersonalInfoTwo from "@/components/modules/PersonalInfoTwo";
 import { handleSignUP } from "@/services/service";
 import { PersonalData, PersonalDataError } from "@/types/user";
 import Image from "next/image";
@@ -87,7 +88,8 @@ const Index = () => {
                         Please answer questions as accurately as possible.
                     </p>
                 </div>
-                <PersonalInfoOne />
+                {/* <PersonalInfoOne /> */}
+                <PersonalInfoTwo />
             </div>
         </div>
     );
