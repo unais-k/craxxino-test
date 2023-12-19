@@ -1,6 +1,7 @@
-import Input from "@/components/ui/input";
+import PersonalInfoOne from "@/components/modules/PersonalInfoOne";
 import { handleSignUP } from "@/services/service";
 import { PersonalData, PersonalDataError } from "@/types/user";
+import Image from "next/image";
 import React, { useState } from "react";
 import validator from "validator";
 
@@ -23,6 +24,13 @@ const initialErrorMessages: PersonalDataError = {
 const Index = () => {
     const [formData, setFormData] = useState(initialFormData);
     const [errorMessages, setErrorMessages] = useState(initialErrorMessages);
+    const [value, setValue] = useState(new Date());
+    const [inputType, setInputType] = useState<"date" | "text">("text");
+
+    const handleDateChange = (date: any) => {
+        console.log("date:", date);
+        setValue(date);
+    };
 
     const validate = (): PersonalDataError => {
         const newErrorMessages: PersonalDataError = {
@@ -79,61 +87,7 @@ const Index = () => {
                         Please answer questions as accurately as possible.
                     </p>
                 </div>
-                <div className="w-[30%]">
-                    <div>
-                        <div className="w-full flex gap-3 h-10 my-4">
-                            <div className="w-1/6 border border-solid rounded-md">
-                                <select className="w-16 outline-none focus:outline-none ps-2 pt-2" name="" id="">
-                                    <option value="Mr">Mr</option>
-                                    <option value="Mrs">Mrs</option>
-                                    <option value="He">He</option>
-                                    <option value="She">She</option>
-                                    <option value="Non-disclosable">Non-disclosable</option>
-                                </select>
-                            </div>
-                            <div className="w-4/6 relative">
-                                <Input
-                                    name="email"
-                                    type="text"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    errorMessage={errorMessages.name}
-                                />
-                            </div>
-                        </div>
-                        <div className="relative w-full min-w-[200px] h-10 my-4">
-                            <Input
-                                name="email"
-                                type="date"
-                                value={formData.name}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                errorMessage={errorMessages.name}
-                            />
-                        </div>
-                        <div className="relative w-full min-w-[200px] h-10 my-4">
-                            <Input
-                                name="email"
-                                type="text"
-                                value={formData.name}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                errorMessage={errorMessages.name}
-                            />
-                        </div>
-                        <div className="relative w-full min-w-[200px] h-10 my-4">
-                            <Input
-                                name="email"
-                                type="text"
-                                value={formData.name}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                errorMessage={errorMessages.name}
-                            />
-                        </div>
-                    </div>
-                </div>
+                <PersonalInfoOne />
             </div>
         </div>
     );

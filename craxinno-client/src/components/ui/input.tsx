@@ -17,6 +17,7 @@ const Input: React.FC<InputProps> = ({ value, onBlur, onChange, errorMessage, na
                 name={name}
                 value={value}
                 onChange={onChange}
+                required
                 onBlur={onBlur}
                 className="peer bg-transparent h-10 w-full text-black rounded-lg placeholder-transparent border border-solid px-2 ring-gray-500 focus:ring-[#0075FF] focus:outline-none focus:border-[#0075FF]"
                 placeholder="Type inside me"

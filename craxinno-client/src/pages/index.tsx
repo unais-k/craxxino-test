@@ -4,6 +4,7 @@ import Input from "@/components/ui/input";
 import { handleSignUP } from "@/services/service";
 import { ErrorMessage, FormData } from "@/types/user";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import validator from "validator";
 
@@ -24,6 +25,8 @@ const initialErrorMessages: ErrorMessage = {
 const HOME = () => {
     const [formData, setFormData] = useState(initialFormData);
     const [errorMessages, setErrorMessages] = useState(initialErrorMessages);
+
+    const router = useRouter();
 
     const validate = (): ErrorMessage => {
         const newErrorMessages: ErrorMessage = {
@@ -72,7 +75,9 @@ const HOME = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setErrorMessages(validate());
-        const response = await handleSignUP(formData);
+        // const response = await handleSignUP(formData);
+
+        router.push("/confirmation-tabs");
 
         // Additional logic for form submission goes here
     };
