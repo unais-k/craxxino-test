@@ -11,7 +11,7 @@ const Navbar: React.FC<LandingPageHeaderProps> = (props) => {
         <>
             <header className={`border-b border-solid h-[60px] w-full`}>
                 <div className="flex justify-between px-20 h-full">
-                    <div className="flex flex-row justify-center items-center gap-5">
+                    <div onClick={() => router.push("/")} className="flex flex-row justify-center items-center gap-5">
                         <div className="flex h-full flex-row justify-center items-center">
                             <div className="relative">
                                 <Image

@@ -14,7 +14,7 @@ const initialState: { user: RegisteredUserInterface } = {
         dob: "",
         address: "",
         livedAtAddress: "",
-        genderLabel: "",
+        gender: "",
         employmentStatus: "",
         savingOrInvestment: "",
         hobbies: "",
@@ -27,7 +27,7 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser(state, action: PayloadAction<RegisteredUserInterface>) {
-            state.user = action.payload;
+            state.user = { ...state.user, ...action.payload };
         },
         clearUser(state) {
             state.user = initialState.user;
