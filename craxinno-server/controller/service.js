@@ -1,13 +1,26 @@
 import UserModel from "./../model/userModel.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const RegisterAPI = async (req, res) => {
     try {
-        const { email, password, phone } = req.body;
+        const {
+            email,
+            password,
+            phone,
+            name,
+            dob,
+            address,
+            livedAtAddress,
+            gender,
+            employmentStatus,
+            savingOrInvestment,
+            hobbies,
+        } = req.body;
         let emailSearch = await UserModel.findOne({ email: email });
-        if (emailSearch) return res.status(400).json({ response: "email id already exist" });
+        if (emailSearch) return res.status(200).json({ status: false, msg: "user email already exist" });
         let phoneSearch = await UserModel.findOne({ phone: phone });
-        if (phoneSearch) return res.status(400).json({ response: "phone number already exist" });
+        if (phoneSearch) return res.status(200).json({ status: false, msg: "phone number already exist" });
 
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(password, salt);
@@ -16,8 +29,26 @@ export const RegisterAPI = async (req, res) => {
                 email: email,
                 password: hashedPassword,
                 phone: phone,
+                name,
+                dob,
+                address,
+                livedAtAddress,
+                gender,
+                employmentStatus,
+                savingOrInvestment,
+                hobbies,
             });
-            res.status(201).json({ response: "user created", user: userDoc });
+
+            const token = await jwt.sign({ userDoc }, process.env.JWT_SECRET, {
+                expiresIn: 3000000,
+            });
+
+            res.status(201).json({
+                status: true,
+                msg: "user created",
+                token: token,
+                user: userDoc,
+            });
         } catch (error) {
             console.log(error.message);
         }

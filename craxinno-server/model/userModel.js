@@ -18,11 +18,10 @@ const userSchema = new mongoose.Schema(
         },
         address: { type: String },
         livedAtAddress: { type: String },
-        genderLabel: { type: String },
+        gender: { type: String },
         employmentStatus: { type: String },
         savingOrInvestment: { type: String },
         hobbies: { type: String },
-        createProcessComplete: { type: Boolean },
         password: {
             type: String,
             min: 6,

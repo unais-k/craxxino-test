@@ -1,7 +1,6 @@
 "use client";
 
 import Input from "@/components/ui/input";
-import { handleSignUP } from "@/services/service";
 import { selectUser, setUser } from "@/store/userSlice";
 import { ErrorMessage, FormData } from "@/types/user";
 import Image from "next/image";
@@ -95,11 +94,7 @@ const HOME = () => {
         if (formData.password !== formData.confirmPassword) return;
 
         await dispatch(setUser(formData));
-        // const response = await handleSignUP(formData);
-
         router.push("/personal-info-tabs");
-
-        // Additional logic for form submission goes here
     };
 
     return (

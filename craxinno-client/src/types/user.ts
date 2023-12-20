@@ -3,7 +3,7 @@ export interface RegisteredUserInterface {
     email?: string;
     token?: string;
     _id?: string;
-    phone?: string;
+    phone?: string | number | any;
     __v?: number;
     dob?: string;
     password?: string;
@@ -13,7 +13,6 @@ export interface RegisteredUserInterface {
     employmentStatus?: string;
     savingOrInvestment?: string;
     hobbies?: string;
-    createProcessComplete?: string;
 }
 
 export interface FormData {

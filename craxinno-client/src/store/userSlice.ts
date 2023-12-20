@@ -1,4 +1,4 @@
-import { PayloadAction, configureStore, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RegisteredUserInterface } from "@/types/user";
 import { RootState } from "./store";
 
@@ -18,7 +18,6 @@ const initialState: { user: RegisteredUserInterface } = {
         employmentStatus: "",
         savingOrInvestment: "",
         hobbies: "",
-        createProcessComplete: "",
     },
 };
 

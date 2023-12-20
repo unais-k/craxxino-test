@@ -1,9 +1,11 @@
 import PersonalInfoTwo from "@/components/modules/PersonalInfoTwo";
-import { selectUser, setUser } from "@/store/userSlice";
+import { handleCreate } from "@/services/service";
+import { clearUser, selectUser, setUser } from "@/store/userSlice";
 import { FinancialData, FinancialDataError } from "@/types/user";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const initialFormData: FinancialData = {
     employmentStatus: "",
@@ -24,6 +26,15 @@ const Index: React.FC = () => {
     const dispatch = useDispatch();
 
     const user = useSelector(selectUser);
+    useEffect(() => {
+        if (user.employmentStatus) {
+            setFormData({
+                employmentStatus: user.employmentStatus,
+                savingOrInvestment: user.savingOrInvestment,
+            });
+            setSelected(user.employmentStatus);
+        }
+    }, [user.employmentStatus, user.savingOrInvestment]);
 
     const handleListChange = (e: any) => {
         setSelected(e?.name);
@@ -58,10 +69,16 @@ const Index: React.FC = () => {
             setErrorMessages(validate());
             return;
         }
-        console.log(formData);
         await dispatch(setUser(formData));
+        if (user.employmentStatus && user.savingOrInvestment) {
+            const response = await handleCreate(user);
+            if (response.status) toast.success("Authorization completed");
 
-        router.push("/financial-info-tabs");
+            dispatch(clearUser());
+            dispatch(setUser(response.user));
+            dispatch(setUser({ token: response.token }));
+            router.push("/profile");
+        }
     };
 
     return (

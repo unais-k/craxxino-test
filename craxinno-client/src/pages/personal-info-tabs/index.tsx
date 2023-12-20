@@ -76,8 +76,8 @@ const Index: React.FC = () => {
         if (!validator.isLength(formData.name, { min: 3 })) {
             newErrorMessages.name = "Write full name";
         }
-        if (!validator.isLength(formData.hobbies, { min: 30 })) {
-            newErrorMessages.hobbies = "write at least 30 characters";
+        if (!validator.isLength(formData.hobbies, { min: 10 })) {
+            newErrorMessages.hobbies = "write at least 10 characters";
         }
 
         if (!validator.isLength(formData.address, { min: 6 })) {
